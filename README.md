@@ -23,6 +23,8 @@ knitr::opts_chunk$set(echo = FALSE)
 
 We examine the xxx using Faustine. Another way to do a citation is this[Faustine].We use "opendatatoronto" to gather data[citesharla].
 
+Add a new line of text
+
 ```{r}
 library(tidyverse)
 library(opendatatoronto)
