@@ -19,11 +19,11 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Introduction
 
-The death rate in Toronto fluctuated significantly between 2020 and 2021. Considering the extraordinary events that occurred during this period, the COVID-19 pandemic is the most significant. As of July 6, 2021, in Toronto, Canada's largest city, there were 170,023 cases of COVID-19 and 3570 deaths. (COVID-19) The risk of COVID-19 may vary by age, biological, socioeconomic, behavioural and logistical reasons differences, these differences may be attributable to these differences. In addition, the increasing aging of the population is also a necessary influencing factor for the surge in mortality. Nushrat Nazia assessed changes in neighbourhood risk among different age groups by calculating the Kohn Kappa coefficient. Findings indicate that knowledge of health risks and health behaviours varies across Toronto communities by age. (covid_map) At the same time, the risk of epidemic infection of the elderly is different from that of the young. In Toronto, Canada, the aging population has been severely affected, accounting for 92% of all COVID-19 deaths. (covid_map) Another set of data shows that more than 80% of COVID-19 deaths in Canada are residents of nursing homes. (covid-19 elder) In addition, considering the impact of motor vehicle collisions, poverty alleviation policies, environment, economy, etc. on the mortality rate, the fluctuations are relatively small. In this report, only injury data from motor vehicle collisions in Toronto from 2005 to 2020 are visualized.
+The death rate in Toronto fluctuated significantly between 2020 and 2021. Considering the extraordinary events that occurred during this period, the COVID-19 pandemic is the most significant. As of July 6, 2021, in Toronto, Canada's largest city, there were 170,023 cases of COVID-19 and 3570 deaths. [@covid-19] The risk of COVID-19 may vary by age, biological, socioeconomic, behavioural and logistical reasons differences, these differences may be attributable to these differences. In addition, the increasing aging of the population is also a necessary influencing factor for the surge in mortality. Nushrat Nazia assessed changes in neighbourhood risk among different age groups by calculating the Kohn Kappa coefficient. Findings indicate that knowledge of health risks and health behaviours varies across Toronto communities by age.[@covid_map] At the same time, the risk of epidemic infection of the elderly is different from that of the young. In Toronto, Canada, the aging population has been severely affected, accounting for 92% of all COVID-19 deaths.[@covid_map] Another set of data shows that more than 80% of COVID-19 deaths in Canada are residents of nursing homes. [@covid] In addition, considering the impact of motor vehicle collisions, poverty alleviation policies, environment, economy, etc. on the mortality rate, the fluctuations are relatively small. In this report, only injury data from motor vehicle collisions in Toronto from 2005 to 2020 are visualized.
 
 There may be errors caused by a series of inequalities in the collection of death data. Different racial and ethnic groups have unequal access to quality health care. Socioeconomic and geographic biases can affect access to health care, health behaviours, and health outcomes, leading to disparities in mortality between different socioeconomic groups and between urban and rural areas, or across regions. Gender bias can lead to differences in death rates between men and women. On the other hand, intentional and accidental underreporting, misclassification, population bias, sampling selection bias, and data quality all have an impact on the accuracy of mortality data.
 
-This report was produced using knitr @citeknitr bookdown @citebookdown.
+This report was produced using knitr [@citeknitr] bookdown [@citebookdown].
 
 
 
@@ -38,15 +38,21 @@ library(ggmap)
 library(modelsummary)
 library(kableExtra)
 library(reprex)
+library(tinytex)
 
 ```
 
 # Data
 
-My primary datasets are Death Rate from 2016 to Present， COVID19 cases, Motor Vehicle Collision, and Neighbourhood Profiles in 2016. The data is obtained from the Open Data Toronto portal, retrieved using the opendatatoronto package @citeopt and saved and retrieved using readr @citereadr.For my data analysis, we will be using R @citeR and the tidyverse package @citetidyverse to perform the data manipulations and ggplot2 @citeggplot to generate plots and figures.
+My primary datasets are Death Rate from 2016 to Present， COVID19 cases, Motor Vehicle Collision, and Neighbourhood Profiles in 2016. The data is obtained from the Open Data Toronto portal, retrieved using the opendatatoronto package [@citeopt] and saved and retrieved using readr [@citereadr].For my data analysis, we will be using R [@citeR] and the tidyverse package [@citetidyverse] to perform the data manipulations and ggplot2 [@citeggplot] to generate plots and figures.For my data analysis, we will be using R [@citeR] and the tidyverse package [@citetidyverse] to perform the data manipulations and ggplot2 [@citeggplot] to generate plots and figures.
 
-The Death Rate dataset is a summary of the number of deaths tracked in Toronto and outside Toronto each month from 2016 to 2020, which includes those located in four civic centers (Scarborough, North York, Toronto, and Etobicoke). Information pertaining to the registration of a death recorded by Registration Services staff.
-The COVID19 cases dataset is a survey by Toronto Public Health of the number of people infected by geography and severity in Toronto since the start of the pandemic. The Neighborhood Profiles in 2016 dataset is a census table of 140 blocks in Toronto released by Statistics Canada, which provides detailed data on block names and different age groups of the population. The Motor Vehicle Collision dataset includes all traffic collisions with deaths or serious injuries from 2006 to 2021, which can reflect the tracking of the number of deaths due to motor vehicle collisions.
+The Death Rate dataset is a summary of the number of deaths tracked in Toronto and outside Toronto each month from 2016 to 2020, which includes those located in four civic centers (Scarborough, North York, Toronto, and Etobicoke). I filtered the local death toll in Toronto and found that the death rate in Toronto has a surge in 2020-2021, but the strange thing is that most of the increased deaths came from Etobicoke. Meanwhile, data for Scarborough is missing from 2020 onwards.
+
+The COVID19 cases dataset is a survey by Toronto Public Health of the number of people infected by geography and severity in Toronto since the start of the pandemic. I filtered the two variables of confirmed and death outcomes, and arranged the data by age group to find that Toronto had x% of the total population's deaths during COVID-19, see Figure \ref{fig:Covid-19}. At the same time, the death rate increases gradually with age, especially among those over 80 years old.
+
+The Neighborhood Profiles in 2016 dataset is a census table of 140 blocks in Toronto released by Statistics Canada, which provides detailed data on block names and different age groups of the population. I analyzed this set of data by filtering three variables, namely topic, characteristic, city_of_toronto, which were then renamed for presentation in tables and graphs, like Figure \ref{fig:aging}. I found that the two age groups 65+ and 85+ had the largest number of people in 2016, which means that by 2020, these people may die of natural causes or increase the possibility of contracting the epidemic when they are older.
+
+The Motor Vehicle Collision dataset includes all traffic collisions with deaths or serious injuries from 2006 to 2021, which can reflect the tracking of the number of deaths due to motor vehicle collisions. I present this set of data by presenting different levels of damage. At the same time, the official classification of accidents is displayed in different colors in Figure \ref{fig:MVC}. There is a bit of ambiguity here that accidents officially classified as fatal are shown as minor injuries or none in the injury classification. Overall, I found that the fatality rate for motor vehicle crashes was relatively flat between 2016 and 2020.
 
 A small subset of before six lines of the death rate data is shown below, formatted using kableExtra @citekable.
 
@@ -163,8 +169,6 @@ cleaned_call_data %>%
   labs(title = "The Death Rate in Toronto from 2011 to Present",)
 ```
 
-Figure \ref{fig:death_rate} 
-
 ## Covid-19
 
 ```{r,results='hide'}
@@ -216,7 +220,7 @@ head(cleaned_19_data)
 ```{r}
 cleaned_19_data |>
   slice(1:6) |>
-  kable(caption = "Example", label = "example", align = "c")
+  kable(caption = "COVID-19", label = "covid19", align = "c")
 ```
 
 
@@ -306,7 +310,7 @@ cleaned_age_data <-
 
 cleaned_age_data |>
   slice(1:6) |>
-  kable(caption = "Example", label = "example", align = "c")
+  kable(caption = "Aging", label = "aging", align = "c")
 ```
 
 ```{r, fig.align='center', fig.pos="!htbp", fig.dim=c(8.46, 4.64), out.width="70%", fig.cap="\\label{fig:aging}The Age of Neighborhood at Toront in 2016", warning=FALSE, message=FALSE}
@@ -388,11 +392,11 @@ cleaned_MVC_data <-
 
 cleaned_MVC_data |>
   slice(1:6) |>
-  kable(caption = "Example", label = "example", align = "c")
+  kable(caption = "MVC", label = "mvc", align = "c")
 
 ```
 
-```{r, fig.align='center', fig.pos="!htbp", fig.dim=c(8.46, 4.64), out.width="70%",fig.cap="\\label{fig:collision}Motor Vehicle Collision in Toronto", warning=FALSE, message=FALSE}
+```{r, fig.align='center', fig.pos="!htbp", fig.dim=c(8.46, 4.64), out.width="70%",fig.cap="\\label{fig:MVC}Motor Vehicle Collision in Toronto", warning=FALSE, message=FALSE}
 cleaned_MVC_data %>%
   ggplot(mapping = aes(x = Year)) +
   geom_bar(aes(fill = Accident_Class)) +
@@ -417,3 +421,4 @@ cleaned_MVC_data %>%
 
 
 # References
+
