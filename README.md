@@ -19,11 +19,11 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Introduction
 
-The death rate in Toronto fluctuated significantly between 2020 and 2021. Considering the extraordinary events that occurred during this period, the COVID-19 pandemic is the most significant. As of July 6, 2021, in Toronto, Canada's largest city, there were 170,023 cases of COVID-19 and 3570 deaths. [@covid-19] The risk of COVID-19 may vary by age, biological, socioeconomic, behavioural and logistical reasons differences, these differences may be attributable to these differences. In addition, the increasing aging of the population is also a necessary influencing factor for the surge in mortality. Nushrat Nazia assessed changes in neighbourhood risk among different age groups by calculating the Kohn Kappa coefficient. Findings indicate that knowledge of health risks and health behaviours varies across Toronto communities by age.[@covid_map] At the same time, the risk of epidemic infection of the elderly is different from that of the young. In Toronto, Canada, the aging population has been severely affected, accounting for 92% of all COVID-19 deaths.[@covid_map] Another set of data shows that more than 80% of COVID-19 deaths in Canada are residents of nursing homes. [@covid] In addition, considering the impact of motor vehicle collisions, poverty alleviation policies, environment, economy, etc. on the mortality rate, the fluctuations are relatively small. In this report, only injury data from motor vehicle collisions in Toronto from 2005 to 2020 are visualized.
+The death rate in Toronto fluctuated significantly between 2020 and 2021. Considering the extraordinary events that occurred during this period, the COVID-19 pandemic is the most significant. As of July 6, 2021, in Toronto, Canada's largest city, there were 170,023 cases of COVID-19 and 3570 deaths [@covid-19]. The risk of COVID-19 may vary by age, biological, socioeconomic, behavioural and logistical reasons differences, these differences may be attributable to these differences. In addition, the increasing aging of the population is also a necessary influencing factor for the surge in mortality. Nushrat Nazia assessed changes in neighbourhood risk among different age groups by calculating the Kohn Kappa coefficient. Findings indicate that knowledge of health risks and health behaviours varies across Toronto communities by age[@covid_map]. At the same time, the risk of epidemic infection of the elderly is different from that of the young. In Toronto, Canada, the aging population has been severely affected, accounting for 92% of all COVID-19 deaths[@covid_map]. Another set of data shows that more than 80% of COVID-19 deaths in Canada are residents of nursing homes [@covid]. In addition, considering the impact of motor vehicle collisions, poverty alleviation policies, environment, economy, etc. on the mortality rate, the fluctuations are relatively small. In this report, only injury data from motor vehicle collisions in Toronto from 2005 to 2020 are visualized.
 
 There may be errors caused by a series of inequalities in the collection of death data. Different racial and ethnic groups have unequal access to quality health care. Socioeconomic and geographic biases can affect access to health care, health behaviours, and health outcomes, leading to disparities in mortality between different socioeconomic groups and between urban and rural areas, or across regions. Gender bias can lead to differences in death rates between men and women. On the other hand, intentional and accidental underreporting, misclassification, population bias, sampling selection bias, and data quality all have an impact on the accuracy of mortality data.
 
-This report was produced using knitr [@citeknitr] bookdown [@citebookdown].
+This report was produced using knitr [@citeknitr], and bookdown [@citebookdown].
 
 
 
@@ -54,7 +54,7 @@ The Neighborhood Profiles in 2016 dataset is a census table of 140 blocks in Tor
 
 The Motor Vehicle Collision dataset includes all traffic collisions with deaths or serious injuries from 2006 to 2021, which can reflect the tracking of the number of deaths due to motor vehicle collisions. I present this set of data by presenting different levels of damage. At the same time, the official classification of accidents is displayed in different colors in Figure \ref{fig:MVC}. There is a bit of ambiguity here that accidents officially classified as fatal are shown as minor injuries or none in the injury classification. Overall, I found that the fatality rate for motor vehicle crashes was relatively flat between 2016 and 2020.
 
-A small subset of before six lines of the death rate data is shown below, formatted using kableExtra @citekable.
+A small subset of before six lines of the death rate data is shown below, formatted using kableExtra [@citekable].
 
 
 ## Death Rate
@@ -421,4 +421,3 @@ cleaned_MVC_data %>%
 
 
 # References
-
