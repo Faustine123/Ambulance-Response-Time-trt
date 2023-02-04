@@ -9,7 +9,7 @@ output:
   toc: true
   toc_depth: 2
 bibliography: references_datasheet.bib
-quote_footer: ["\\begin{https://github.com/Faustine123/Ambulance-Response-Time-trt/commit/c3d777ef367b87fec6c19eabbc6b3d4b25e745e1?short_path=b335630#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5t}", "\\end{flushright}"]
+quote_footer: ["\\begin{https://github.com/Faustine123/Death_Rate_trt}", "\\end{flushright}"]
 ---
 
 ```{r setup, include=FALSE}
